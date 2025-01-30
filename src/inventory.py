@@ -1,110 +1,100 @@
-import json
-
-"""class Item:
-    def __init__(self, name: str, item_type: str, description: str = "", weight: float = 0.0, value: int = 0):
-        self.name = name
-        self.item_type = item_type  # e.g., "weapon", "potion", "key"
-        self.description = description
-        self.weight = weight
-        self.value = value
-
-    def __repr__(self):
-        return f"{self.name} ({self.item_type})"""
+from typing import Dict, List, Optional
+from src.items import Item, all_items  # Import your Item class
 
 
+class Inventory:
+    def __init__(
+            self,
+            max_weight: float = 100.0,
+            max_slots: int = 20
+    ):
+        self.items: Dict[str, int] = {}  # {item_id: quantity}
+        self.max_weight = max_weight
+        self.max_slots = max_slots
 
-#class Inventory:
-    def __init__(self, max_weight: float = None, max_slots: int = 10):
-        self.items = []  # List of Item objects
-        self.max_weight = max_weight  # Optional weight limit
-        self.max_slots = max_slots  # Optional slot limit
+    def add_item(
+            self,
+            item_id: str,
+            all_items: Dict[str, Item],  # Required parameter first
+            quantity: int = 1
+    ) -> bool:
+        """Add an item by ID. Returns True if successful."""
+        item = all_items.get(item_id)
+        if not item:
+            print(f"Item {item_id} not found!")
+            return False
 
-    def add_item(self, item: Item) -> bool:
-        """Add an item to the inventory if there's space."""
-        if self._check_can_add(item):
-            self.items.append(item)
+        # Check weight
+        new_weight = self.current_weight(all_items) + (item.weight * quantity)
+        if new_weight > self.max_weight:
+            print(f"Cannot add {item_id}: Overweight!")
+            return False
+
+        # Check slots (if slot-limited)
+        if self.max_slots and len(self.items) >= self.max_slots:
+            print(f"Cannot add {item_id}: Inventory full!")
+            return False
+
+        # Add item
+        self.items[item_id] = self.items.get(item_id, 0) + quantity
+        return True
+
+    def remove_item(self, item_id: str, quantity: int = 1) -> bool:
+        """Remove a quantity of an item by ID."""
+        if self.items.get(item_id, 0) >= quantity:
+            self.items[item_id] -= quantity
+            if self.items[item_id] <= 0:
+                del self.items[item_id]
             return True
         return False
 
-    def remove_item(self, item_name: str) -> bool:
-        """Remove an item by name."""
-        for item in self.items:
-            if item.name == item_name:
-                self.items.remove(item)
-                return True
-        return False
-
-    def get_total_weight(self) -> float:
+    def current_weight(self, ALL_ITEMSs: Dict[str, Item]) -> float:
         """Calculate total weight of the inventory."""
-        return sum(item.weight for item in self.items)
+        return sum(
+            all_items[item_id].weight * qty
+            for item_id, qty in self.items.items()
+        )
 
-    def _check_can_add(self, item: Item) -> bool:
-        """Check if the item can be added (weight/slots)."""
-        if self.max_slots and len(self.items) >= self.max_slots:
-            print("Inventory slots full!")
-            return False
-        if self.max_weight and (self.get_total_weight() + item.weight) > self.max_weight:
-            print("Inventory too heavy!")
-            return False
-        return True
-
-    def display(self):
-        """Print the inventory contents."""
+    def display(self, ALL_ITEMS: Dict[str, Item]) -> str:
+        """Return a formatted inventory string."""
         if not self.items:
-            print("Inventory is empty.")
-            return
-        print("Inventory Contents:")
-        for item in self.items:
-            print(f"- {item.name} ({item.item_type}, {item.weight} kg)")
-        print(f"Total Weight: {self.get_total_weight()} kg")
+            return "Inventory is empty."
 
-def save_inventory(inventory: Inventory, filename: str):
-    data = {
-        "items": [
-            {
-                "name": item.name,
-                "type": item.item_type,
-                "weight": item.weight,
-                "value": item.value,
-                "description": item.description
-            } for item in inventory.items
-        ],
-        "max_weight": inventory.max_weight,
-        "max_slots": inventory.max_slots
-    }
-    with open(filename, 'w') as f:
-        json.dump(data, f, indent=4)
+        text = f"Inventory ({self.current_weight(all_items)}/{self.max_weight} kg):\n"
+        for item_id, qty in self.items.items():
+            item = all_items[item_id]
+            text += f"- {item.name} x{qty} ({item.item_type}, {item.weight} kg)\n"
+            if item.effect:
+                text += f"  Effect: {item.effect['type']}\n"
+            if item.stat_bonuses:
+                text += f"  Stats: {item.stat_bonuses}\n"
+        return text
 
-def load_inventory(filename: str) -> Inventory:
-    with open(filename, 'r') as f:
-        data = json.load(f)
-    inventory = Inventory(max_weight=data["max_weight"], max_slots=data["max_slots"])
-    for item_data in data["items"]:
-        item = Item(**item_data)
-        inventory.add_item(item)
-    return inventory
+    def to_dict(self) -> Dict:
+        """Serialize inventory for saving."""
+        return {
 
+            "max_weight": self.max_weight,
+            "max_slots": self.max_slots,
+            "items": self.items
+        }
 
-# Create items
-sword = Item("weapon", "A sharp blade.", weight=2.5, value=50)
-potion = Item("Health Potion", "potion", "Restores 20 HP.", weight=0.5, value=10)
-key = Item("Rusty Key", "key", "Opens old doors.", weight=0.1, value=5)
+    @classmethod
+    def from_dict(
+        cls,
+        data: Dict,
+        all_items: Dict[str, Item]
+    ) -> 'Inventory':
+        """Load inventory from a dictionary."""
+        inventory = cls(
+            max_weight=data["max_weight"],
+            max_slots=data["max_slots"]
+        )
+        # Validate item IDs exist before adding
+        for item_id, qty in data["items"].items():
+            if item_id in all_items:
+                inventory.items[item_id] = qty
+            else:
+                print(f"WARNING: Skipping invalid item {item_id} in saved inventory.")
+        return inventory
 
-# Create an inventory with a weight limit of 5 kg and 4 slots
-player_inventory = Inventory(max_weight=10, max_slots=4)
-
-# Add items
-player_inventory.add_item(sword)  # Success
-player_inventory.add_item(potion) # Success
-player_inventory.add_item(key)    # Success
-player_inventory.add_item(Item("Shield", "armor", weight=3.0))  # Fails (total weight exceeds 5 kg)
-
-player_inventory.display()
-
-# Remove an item
-player_inventory.remove_item("Health Potion")
-
-# Display inventory
-player_inventory.display()
-
-save_inventory(player_inventory, "../inventory.json")

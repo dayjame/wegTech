@@ -100,8 +100,8 @@ class Inventory:
 
     # Load all items first
     # Load items first
-from src.items import load_all_items
-all_items = load_all_items()
+#from src.items import load_all_items
+#all_items = load_all_items()
 
     # Initialize inventory
 inventory = Inventory(max_weight=50.0)

@@ -2,7 +2,7 @@ import os
 import json
 from typing import Dict
 from pathlib import Path
-from character import Character
+# from character import Character
 
 class Item:
     def __init__(
@@ -70,12 +70,12 @@ class Ability:
         self.current_cooldown = self.cooldown
         print(f"{user.name} activates {self.name} – a whirlwind of strikes begins!")
         return True
-"""
+
 def use_consumable(character: Character, item: Item):
     if item.item_type != "consumable":
         print(f"{item.name} isn’t a consumable!")
         return
-"""
+
     effect = item.effect
     if effect["type"] == "restore_hp":
         character.hp = min(character.max_hp, character.hp + effect["potency"])

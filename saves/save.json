@@ -1,0 +1,9 @@
+{
+  "max_weight": 50.0,
+  "max_slots": 20,
+  "items": {
+    "frostbrand": 1,
+    "minor_healing_potion": 3,
+    "chainmail_tunic": 1
+  }
+}
