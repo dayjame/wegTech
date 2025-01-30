@@ -1,6 +1,6 @@
 import json
 
-class Item:
+"""class Item:
     def __init__(self, name: str, item_type: str, description: str = "", weight: float = 0.0, value: int = 0):
         self.name = name
         self.item_type = item_type  # e.g., "weapon", "potion", "key"
@@ -9,11 +9,11 @@ class Item:
         self.value = value
 
     def __repr__(self):
-        return f"{self.name} ({self.item_type})"
+        return f"{self.name} ({self.item_type})"""
 
 
 
-class Inventory:
+#class Inventory:
     def __init__(self, max_weight: float = None, max_slots: int = 10):
         self.items = []  # List of Item objects
         self.max_weight = max_weight  # Optional weight limit
@@ -107,4 +107,4 @@ player_inventory.remove_item("Health Potion")
 # Display inventory
 player_inventory.display()
 
-save_inventory(player_inventory, "inventory.json")
+save_inventory(player_inventory, "../inventory.json")

@@ -1,0 +1,65 @@
+{
+  "chainmail_tunic": {
+    "name": "Chainmail Tunic",
+    "description": "A sturdy iron chainmail shirt. Offers reliable torso protection.",
+    "type": "chest",
+    "weight": 12.0,
+    "value": 75,
+    "defense": 8,
+    "stat_bonuses": {"endurance": 1}
+  },
+  "leather_chestplate": {
+    "name": "Leather Chestplate",
+    "description": "Hardened leather armor. Lightweight but limited protection.",
+    "type": "chest",
+    "weight": 5.5,
+    "value": 30,
+    "defense": 4,
+    "stat_bonuses": {"agility": 1}
+  },
+  "iron_helmet": {
+    "name": "Iron Helmet",
+    "description": "A simple domed helmet with a nasal guard.",
+    "type": "head",
+    "weight": 3.0,
+    "value": 25,
+    "defense": 3,
+    "stat_bonuses": {}
+  },
+  "studded_leather_gloves": {
+    "name": "Studded Leather Gloves",
+    "description": "Reinforced gloves for hand protection during combat.",
+    "type": "hands",
+    "weight": 1.2,
+    "value": 15,
+    "defense": 2,
+    "stat_bonuses": {"strength": 1}
+  },
+  "reinforced_boots": {
+    "name": "Reinforced Boots",
+    "description": "Thick leather boots with iron toe caps.",
+    "type": "feet",
+    "weight": 2.8,
+    "value": 20,
+    "defense": 2,
+    "stat_bonuses": {"endurance": 1}
+  },
+  "round_shield": {
+    "name": "Round Shield",
+    "description": "A wooden shield reinforced with iron bands.",
+    "type": "shield",
+    "weight": 6.0,
+    "value": 50,
+    "defense": 6,
+    "stat_bonuses": {}
+  },
+  "travelers_cloak": {
+    "name": "Traveler's Cloak",
+    "description": "A thick wool cloak. Provides minimal armor but keeps you warm.",
+    "type": "cloak",
+    "weight": 1.5,
+    "value": 10,
+    "defense": 1,
+    "stat_bonuses": {}
+  }
+}

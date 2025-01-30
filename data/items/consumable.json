@@ -1,0 +1,92 @@
+{
+  "minor_healing_potion": {
+    "name": "Minor Healing Potion",
+    "description": "Restores 30 HP. Has a bitter herbal aftertaste.",
+    "type": "consumable",
+    "weight": 0.5,
+    "value": 25,
+    "effect": {
+      "type": "restore_hp",
+      "potency": 30,
+      "target": "self"
+    }
+  },
+  "mana_elixir": {
+    "name": "Mana Elixir",
+    "description": "Recovers 20 MP. Glows faintly blue.",
+    "type": "consumable",
+    "weight": 0.5,
+    "value": 35,
+    "effect": {
+      "type": "restore_mp",
+      "potency": 20,
+      "target": "self"
+    }
+  },
+  "antidote": {
+    "name": "Antidote",
+    "description": "Cures poison and venom effects.",
+    "type": "consumable",
+    "weight": 0.3,
+    "value": 20,
+    "effect": {
+      "type": "remove_status",
+      "status": "poisoned",
+      "target": "self"
+    }
+  },
+  "strength_tonic": {
+    "name": "Strength Tonic",
+    "description": "Grants +5 Strength for 3 turns. Tastes like iron.",
+    "type": "consumable",
+    "weight": 0.5,
+    "value": 50,
+    "effect": {
+      "type": "buff",
+      "stat": "strength",
+      "value": 5,
+      "duration": 3,
+      "target": "self"
+    }
+  },
+  "scroll_of_fireball": {
+    "name": "Scroll of Fireball",
+    "description": "Single-use scroll casting Fireball (45 fire damage).",
+    "type": "consumable",
+    "weight": 0.2,
+    "value": 80,
+    "effect": {
+      "type": "spell",
+      "spell_id": "fireball",
+      "damage": 45,
+      "element": "fire",
+      "target": "enemy"
+    }
+  },
+  "smoke_bomb": {
+    "name": "Smoke Bomb",
+    "description": "Allows escape from non-boss battles.",
+    "type": "consumable",
+    "weight": 1.0,
+    "value": 40,
+    "effect": {
+      "type": "utility",
+      "action": "flee",
+      "success_rate": 0.9,
+      "target": "party"
+    }
+  },
+  "blessed_bandage": {
+    "name": "Blessed Bandage",
+    "description": "Staunches bleeding and restores 10 HP over 3 turns.",
+    "type": "consumable",
+    "weight": 0.4,
+    "value": 30,
+    "effect": {
+      "type": "hot",
+      "potency": 10,
+      "duration": 3,
+      "target": "self"
+    }
+  }
+}
