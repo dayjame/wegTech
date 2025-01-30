@@ -17,10 +17,13 @@ def dice_roll(num_dice):
 # Get the number of dice to roll and the bonus from user
 # Send the num_dice to the roller function
 # Sum the total of the dice and the roll bonus
-num_dice = int(input("How many dice do you want to roll? "))
-roll_bonus = int(input("What is the bonus? "))
-[roll] = dice_roll(num_dice)
-score = sum(roll, roll_bonus)
+def main():
+    num_dice = int(input("How many dice do you want to roll? "))
+    roll_bonus = int(input("What is the bonus? "))
+    [roll] = dice_roll(num_dice)
+    score = sum(roll, roll_bonus)
 
-print(roll)
-print(score)
+    print(roll)
+    print(score)
+
+main()

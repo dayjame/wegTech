@@ -13,3 +13,6 @@ playerClass = input(f"What is {playerName}'s class? ")
 newCharacter = PlayerCharacter(playerName, playerClass)
 
 print(f"This is the adventure of {newCharacter.name} the {newCharacter.charClass}")
+
+def method():
+    print("new")

@@ -1,0 +1,16 @@
+{
+  "iron_sword": {
+    "name": "Iron Sword",
+    "type": "Melee",
+    "description": "A standard iron blade",
+    "weight": 2.0,
+    "value": 50
+  },
+  "bow": {
+    "name": "Short Bow",
+    "type": "Ranged",
+    "description": "An ordinary short bow",
+    "weight": 2.2,
+    "value": 25
+  }
+}
