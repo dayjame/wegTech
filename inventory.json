@@ -1,0 +1,27 @@
+{
+    "items": [
+        {
+            "name": "weapon",
+            "type": "A sharp blade.",
+            "weight": 2.5,
+            "value": 50,
+            "description": ""
+        },
+        {
+            "name": "Rusty Key",
+            "type": "key",
+            "weight": 0.1,
+            "value": 5,
+            "description": "Opens old doors."
+        },
+        {
+            "name": "Shield",
+            "type": "armor",
+            "weight": 3.0,
+            "value": 0,
+            "description": ""
+        }
+    ],
+    "max_weight": 10,
+    "max_slots": 4
+}
