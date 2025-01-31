@@ -1,31 +1,44 @@
 import os
 import json
-from typing import Dict
+from typing import Dict, Optional, Any
 from pathlib import Path
 # from character import Character
 
 class Item:
     def __init__(
-        self,
-        item_id: str,
-        name: str,
-        item_type: str,
-        description: str,
-        weight: float,
-        value: int,
-        stat_bonuses: Dict[str, int] = None,
-        effect: Dict = None,
-        special_abilities: list = None
+            self,
+            item_id: str,
+            name: str,
+            item_type: str,
+            description: str = "",
+            weight: float = 0.0,
+            value: int = 0,
+            stat_bonuses: Optional[Dict[str, int]] = None,
+            effect: Optional[Dict] = None,
+            special_abilities: Optional[list] = None,
+            **kwargs  # Catch-all for additional fields like 'defense', 'damage', etc.
     ):
+        # Core fields
         self.id = item_id
         self.name = name
         self.item_type = item_type
         self.description = description
         self.weight = weight
         self.value = value
+
+        # Optional fields (with defaults)
         self.stat_bonuses = stat_bonuses or {}
-        self.effect = effect
+        self.effect = effect or {}
         self.special_abilities = special_abilities or []
+
+        # Store all other JSON fields (e.g., 'defense', 'durability') here
+        self.attributes = kwargs
+
+    def __getattr__(self, name: str) -> Any:
+        """Allow access to attributes via dot notation (e.g., item.defense)."""
+        if name in self.attributes:
+            return self.attributes[name]
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
 
 class Ability:
     def __init__(

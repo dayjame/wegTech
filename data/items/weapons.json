@@ -1,20 +1,21 @@
 {
   "iron_sword": {
     "name": "Iron Sword",
-    "type": "Melee",
+    "type": "weapon",
     "description": "A standard iron blade",
     "weight": 2.0,
     "value": 50
   },
   "bow": {
     "name": "Short Bow",
-    "type": "Ranged",
+    "type": "weapon",
     "description": "An ordinary short bow",
     "weight": 2.2,
     "value": 25
   },
   "frostbrand": {
     "name": "Frostbrand",
+    "type": "weapon",
     "description": "A crystalline longsword that radiates icy mist. Freezes enemies on contact.",
     "weight": 3.2,
     "value": 450,
@@ -22,6 +23,7 @@
   },
   "soulreaper": {
     "name": "Soulreaper",
+    "type": "weapon",
     "description": "A cursed scythe that drains the life force of its victims.",
     "weight": 5.5,
     "value": 600,
@@ -29,6 +31,7 @@
   },
   "dwarven_warhammer": {
     "name": "Dwarven Warhammer",
+    "type": "weapon",
     "description": "A massive hammer forged in the volcanic forges of Mount Vorn.",
     "weight": 12.0,
     "value": 300,
@@ -36,6 +39,7 @@
   },
   "phoenix_bow": {
     "name": "Phoenix Bow",
+    "type": "weapon",
     "description": "A fiery recurve bow that ignites arrows mid-flight.",
     "weight": 1.8,
     "value": 400,
@@ -43,6 +47,7 @@
   },
   "voidblade": {
     "name": "Voidblade",
+    "type": "weapon",
     "description": "A dagger forged from a shard of the Abyss. Ignores armor.",
     "weight": 0.9,
     "value": 550,
@@ -50,6 +55,7 @@
   },
   "dragonscale_axe": {
     "name": "Dragonscale Axe",
+    "type": "weapon",
     "description": "A double-headed axe adorned with red dragon scales.",
     "weight": 6.5,
     "value": 350,
@@ -57,6 +63,7 @@
   },
   "celestial_staff": {
     "name": "Celestial Staff",
+    "type": "weapon",
     "description": "A staff imbued with starlight. Enhances spellcasting.",
     "weight": 2.5,
     "value": 500,
@@ -64,6 +71,7 @@
   },
   "serpent_spear": {
     "name": "Serpent Spear",
+    "type": "weapon",
     "description": "A venom-tipped spear that poisons foes over time.",
     "weight": 4.0,
     "value": 280,
@@ -71,6 +79,7 @@
   },
   "thunderfist_gauntlets": {
     "name": "Thunderfist Gauntlets",
+    "type": "weapon",
     "description": "Melee gauntlets that crackle with lightning on impact.",
     "weight": 3.0,
     "value": 380,
@@ -78,6 +87,7 @@
   },
   "moonlit_glaive": {
     "name": "Moonlit Glaive",
+    "type": "weapon",
     "description": "An elegant polearm that glows under moonlight.",
     "weight": 4.8,
     "value": 420,
@@ -85,6 +95,7 @@
   },
   "bloodthorn_whip": {
     "name": "Bloodthorn Whip",
+    "type": "weapon",
     "description": "A barbed whip that causes bleeding wounds.",
     "weight": 2.2,
     "value": 320,
@@ -92,6 +103,7 @@
   },
   "titan_greataxe": {
     "name": "Titan Greataxe",
+    "type": "weapon",
     "description": "A colossal axe wielded by ancient giants.",
     "weight": 15.0,
     "value": 700,
@@ -99,6 +111,7 @@
   },
   "shadowcrossbow": {
     "name": "Shadowcrossbow",
+    "type": "weapon",
     "description": "A silent crossbow that fires bolts of pure darkness.",
     "weight": 3.5,
     "value": 480,
@@ -106,6 +119,7 @@
   },
   "sunflare_mace": {
     "name": "Sunflare Mace",
+    "type": "weapon",
     "description": "A holy mace that smites undead and demons.",
     "weight": 5.0,
     "value": 400,
@@ -113,6 +127,7 @@
   },
   "stormcaller_katana": {
     "name": "Stormcaller Katana",
+    "type": "weapon",
     "description": "A lightning-charged blade that strikes with the speed of a tempest.",
     "weight": 2.5,
     "value": 600,

@@ -5,29 +5,27 @@ from src.inventory import Inventory
 from src.savetest import save_inventory
 from src.savetest import load_inventory
 from src.character import Character
+from src.item_registry import ItemRegistry
 
-ALL_ITEMS = load_all_items()
+
+# Initialize the registry (loads all items)
+ItemRegistry()
+
+# ALL_ITEMS = load_all_items()
 
 # Create a character
 kenshin = Character(name="Kenshin", base_stats={"agility": 15, "strength": 12})
 
-# Add items to inventory
-kenshin.inventory.add_item("stormcaller_katana", ALL_ITEMS)
-kenshin.inventory.add_item("blessed_bandage", ALL_ITEMS, quantity=2)
 
-# Equip the katana
-kenshin.equip("stormcaller_katana")
+# Create inventory
+player_inventory = Inventory(max_weight=50.0)
 
-# Check effective stats
-print(kenshin.effective_stats["agility"])  # 15 (base) + 12 (katana) = 27
+# Add items by ID
+player_inventory.add_item("frostbrand")
+player_inventory.add_item("minor_healing_potion", quantity=3)
 
-# Apply poison status (agility penalty)
-kenshin.apply_status_effect(
-    effect_id="poison",
-    duration=3,
-    stat_modifiers={"agility": -5}
-)
-print(kenshin.effective_stats["agility"])  # 27 - 5 = 22
+# Display
+print(player_inventory.display())
 
 """
 all_items = load_all_items()

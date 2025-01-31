@@ -3,29 +3,32 @@ from typing import Dict, Optional
 
 from src.items import Item, all_items
 from src.inventory import Inventory
-
+from src.item_registry import ItemRegistry
 
 class Character:
     def __init__(
             self,
             name: str,
             level: int = 1,
-            base_stats: Dict[str, int] = None
+            base_stats: Dict[str, int] = None,
     ):
+
         # Core Identity
         self.name = name
         self.level = level
         self.xp = 0
 
-        # Base Stats (unmodified by equipment/statuses)
-        self.base_stats = base_stats or {
+        # Ensure all base stats exist, even if not provided
+        default_stats = {
             "strength": 10,
             "agility": 10,
             "intelligence": 10,
             "endurance": 10,
             "wisdom": 10
         }
-
+        if base_stats:
+            default_stats.update(base_stats)  # Override defaults with provided stats
+        self.base_stats = default_stats
         # Health/Mana
         self.hp = self.max_hp
         self.mp = self.max_mp
@@ -76,7 +79,7 @@ class Character:
         if not self.inventory.has_item(item_id):
             return False
 
-        item = Item.get_item(item_id)
+        item = ItemRegistry.get_item(item_id)
         slot = item.item_type  # e.g., "weapon"
 
         # Unequip existing item first
@@ -156,27 +159,4 @@ class Character:
         char.status_effects = data["status_effects"]
         return char
 
-    # Load items
-    from src.items import load_all_items
-    ALL_ITEMS = load_all_items()
 
-    # Create a character
-kenshin = Character(name="Kenshin", base_stats={"agility": 15, "strength": 12})
-
-    # Add items to inventory
-kenshin.inventory.add_item("stormcaller_katana", all_items)
-kenshin.inventory.add_item("blessed_bandage", all_items, quantity=2)
-
-    # Equip the katana
-kenshin.equip("stormcaller_katana")
-
-    # Check effective stats
-print(kenshin.effective_stats["agility"])  # 15 (base) + 12 (katana) = 27
-
-    # Apply poison status (agility penalty)
-kenshin.apply_status_effect(
-    effect_id="poison",
-    duration=3,
-    stat_modifiers={"agility": -5}
-    )
-print(kenshin.effective_stats["agility"])  # 27 - 5 = 22
