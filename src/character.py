@@ -60,8 +60,10 @@ class Character:
 
         # Apply equipment bonuses
         for item_id in self.equipment.values():
-            if item_id:
-                item = Item.get_item(item_id)  # Assume a global Item registry
+            if not item_id:  # Skip empty slots
+                continue
+            item = ItemRegistry.get_item(item_id)
+            if item:
                 for stat, bonus in item.stat_bonuses.items():
                     stats[stat] += bonus
 
@@ -77,9 +79,19 @@ class Character:
     def equip(self, item_id: str) -> bool:
         """Equip an item from the inventory."""
         if not self.inventory.has_item(item_id):
+            print(f"Error: {self.name} doesn't have {item_id} in their inventory!")
             return False
 
         item = ItemRegistry.get_item(item_id)
+        if  not item:
+            print(f"Error: Item {item_id} not found in the registry!")
+            return False
+
+        # Check if the item is equippable (e.g., weapon/armor)
+        if item.item_type not in ["weapon", "armor", "accessory"]:
+            print(f"Error: {item.name} cannot be equipped!")
+            return False
+
         slot = item.item_type  # e.g., "weapon"
 
         # Unequip existing item first

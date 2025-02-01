@@ -12,6 +12,10 @@ class Inventory:
         self.max_weight = max_weight
         self.max_slots = max_slots
 
+    def has_item(self, item_id: str) -> bool:
+        """Check if the inventory contains the item."""
+        return item_id in self.items
+
     def add_item(
             self,
             item_id: str,
